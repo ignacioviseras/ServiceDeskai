@@ -1,0 +1,38 @@
+# version: '3.8' # Versión de Docker Compose
+
+# services:
+#   # 1. SERVICIO DE MONGODB (BASE DE DATOS)
+#   mongo:
+#     image: mongo:latest # Usamos la imagen oficial de MongoDB
+#     container_name: mongo-db
+#     restart: always
+#     ports:
+#       - "27017:27017" # Mapeamos el puerto de la máquina local al contenedor
+#     volumes:
+#       # Esto permite que los datos persistan en tu máquina local
+#       - mongo-data:/data/db
+
+#   # 2. SERVICIO DE BACKEND (NODE.JS + EXPRESS)
+#   backend:
+#     build:
+#       context: ./backend # Le indicamos a Docker dónde encontrar el Dockerfile
+#       dockerfile: Dockerfile
+#     container_name: service-desk-backend
+#     restart: always
+#     ports:
+#       - "5000:5000" # Puerto de la app (el que definiste en PORT=5000)
+#     # Especificamos que el backend depende del servicio 'mongo'
+#     depends_on:
+#       - mongo
+#     environment:
+#       # MUY IMPORTANTE: La URI ahora usa el nombre del servicio 'mongo'
+#       # Ya no es '127.0.0.1', sino 'mongo' (el nombre del servicio)
+#       MONGO_URI: mongodb://mongo:27017/service_desk_db
+#       PORT: 5000
+#     volumes:
+#       # Montar el código para que los cambios se reflejen sin reconstruir la imagen
+#       - ./backend:/app
+#       - /app/node_modules # Evitar que los node_modules locales sobrescriban los del contenedor
+
+# volumes:
+#   mongo-data: # Define el volumen para persistir los datos de MongoDB
