@@ -49,7 +49,6 @@ userSchema.pre('save', async function () {
     
     try {
         const salt = await bcrypt.genSalt(10);
-        
         // hashea la contraseña y pasa el texto plano
         this.password = await bcrypt.hash(this.password, salt);
     } catch (err) {

@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
-import ticketRoutes from './routes/ticketRoutes';
+import officeRoutes from './routes/officeRoutes';
 
 dotenv.config();
 
@@ -37,8 +37,8 @@ app.get('/', (req: Request, res: Response) => {
     res.json({ message: 'Welcome to the Backend!' });
 });
 
-app.use('/api/users', userRoutes); // RUTAS DE REGISTRO/LOGIN/ME
-app.use('/api/tickets', ticketRoutes); // RUTAS CRUD DE TICKETS
+app.use('/api/users', userRoutes);
+app.use('/api/offices', officeRoutes);
 
 app.use(errorHandler);
 

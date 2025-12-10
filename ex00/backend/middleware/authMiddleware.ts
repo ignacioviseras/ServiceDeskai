@@ -42,16 +42,13 @@ const protect = asyncHandler(async (req: CustomRequest, res: Response, next: Nex
                 res.status(401);
                 throw new Error('Usuario no encontrado');
             }
-
             next();
-
         } catch (error) {
             console.error(error);
             res.status(401);
             throw new Error('No autorizado, token fallido');
         }
     }
-
     if (!token) {
         res.status(401);
         throw new Error('No autorizado, no hay token');
