@@ -1,7 +1,6 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
-import * as bcrypt from 'bcryptjs'; // Asegúrate de instalar bcryptjs
+import * as bcrypt from 'bcryptjs';
 
-// 1. Interfaz de Usuario (Exportada para uso externo)
 export interface IUser extends Document {
     name: string;
     email: string;
@@ -16,18 +15,18 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         name: {
             type: String,
             lowercase: true, 
-            required: [true, 'Por favor, introduce un nombre'],
+            required: [true, 'put the name'],
         },
         email: {
             type: String,
-            required: [true, 'Por favor, introduce un email'],
+            required: [true, 'put the email'],
             unique: true,
             lowercase: true,
             trim: true,
         },
         password: {
             type: String,
-            required: [true, 'Por favor, introduce una contraseña'],
+            required: [true, 'put the password'],
         },
         role: {
             type: String,
@@ -52,7 +51,7 @@ userSchema.pre('save', async function () {
         // hashea la contraseña y pasa el texto plano
         this.password = await bcrypt.hash(this.password, salt);
     } catch (err) {
-        throw new Error('Error al hashear la contraseña.');
+        throw new Error('Error in hash the password');
     }
 });
 
