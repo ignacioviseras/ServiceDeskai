@@ -1,12 +1,12 @@
-import express, { Request, Response, NextFunction } from 'express'; // Importamos los tipos necesarios
-import { errorHandler } from './middleware/errorMiddleware'; 
+import express, { Request, Response, NextFunction } from 'express';
+import { errorHandler } from './src/middleware/errorMiddleware'; 
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import userRoutes from './routes/userRoutes';
-import officeRoutes from './routes/officeRoutes';
-import expedientRoutes from './routes/expedientRoutes';
-import { initdb } from './database/initdb';
+import userRoutes from './src/routes/userRoutes';
+import officeRoutes from './src/routes/officeRoutes';
+import expedientRoutes from './src/routes/expedientRoutes';
+import { initdb } from './src/database/initdb';
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ const connectDB = async (): Promise<void> => {
         await mongoose.connect(process.env.MONGO_URI);
         console.log('--- MongoDB connected ---');
     } catch (error: unknown) { 
-        // TypeScript requiere una comprobación de tipo para acceder a propiedades de 'unknown'
+        // comprobación de tipo para acceder a propiedades de 'unknown'
         if (error instanceof Error) {
             console.error(`Database connection error: ${error.message}`);
         } else {
@@ -36,7 +36,7 @@ const connectDB = async (): Promise<void> => {
 };
 
 app.get('/', (req: Request, res: Response) => {
-    res.json({ message: 'Welcome to the Backend!' });
+    res.json({ message: 'backend response ok' });
 });
 
 app.use('/api/users', userRoutes);
