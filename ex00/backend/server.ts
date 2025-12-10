@@ -6,6 +6,7 @@ import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import officeRoutes from './routes/officeRoutes';
 import expedientRoutes from './routes/expedientRoutes';
+import { initdb } from './database/initdb';
 
 dotenv.config();
 
@@ -45,7 +46,8 @@ app.use('/api/expedients', expedientRoutes);
 app.use(errorHandler);
 
 //firts conect the db and if the connection si okey start the serv
-connectDB().then(() => {
+connectDB().then(async () => {
+    await initdb();
     app.listen(PORT, () =>
         console.log(`Express server running on port ${PORT}`)
     );
