@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import officeRoutes from './routes/officeRoutes';
+import expedientRoutes from './routes/expedientRoutes';
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ const connectDB = async (): Promise<void> => {
         }
         await mongoose.connect(process.env.MONGO_URI);
         console.log('--- MongoDB connected ---');
-    } catch (error: unknown) { // CORRECCIÓN TS18046: Tipificamos 'error' explícitamente como 'unknown'
+    } catch (error: unknown) { 
         // TypeScript requiere una comprobación de tipo para acceder a propiedades de 'unknown'
         if (error instanceof Error) {
             console.error(`Database connection error: ${error.message}`);
@@ -39,6 +40,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/offices', officeRoutes);
+app.use('/api/expedients', expedientRoutes);
 
 app.use(errorHandler);
 
