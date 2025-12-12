@@ -1,25 +1,107 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
+import Layout from './components/shared/Layout';
+import RoleGuard from './components/shared/RoleGuard'; 
+import AdminDashboard from './pages/admin/AdminDashboard'; 
+import ServiceDeskDashboard from './pages/servicedesk/ServiceDeskDashboard';
+import StandardDashboard from './pages/user/StandardDashboard'; 
+import { useAppSelector } from './app/hooks';
+import TicketSubmission from './pages/user/TicketSubmission';
+import TicketOpenList from './pages/servicedesk/TicketOpenList';
+import './index.css';
+
+const DashboardRouter = () => {
+  const { user } = useAppSelector((state) => state.auth);
+  
+  if (!user)
+    return null;
+
+  switch (user.role.toLowerCase()) {
+    case 'admin':
+      return <AdminDashboard />;
+    case 'service_desk':
+      return <ServiceDeskDashboard />;
+    case 'standard':
+    default:
+      return <StandardDashboard />;
+  }
+};
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      
+      <Route path="/" element={<Layout />}>
+        <Route 
+          index
+          element={
+            <RoleGuard allowedRoles={['standard', 'service_desk', 'admin']}>
+              <DashboardRouter /> 
+            </RoleGuard>
+          } 
+        />
+        
+        <Route 
+          path="reports"
+          element={
+            <RoleGuard allowedRoles={['standard']}>
+              <StandardDashboard /> 
+            </RoleGuard>
+          } 
+        />
+        <Route 
+          path="reports/new"
+          element={
+            <RoleGuard allowedRoles={['standard']}>
+              <TicketSubmission />
+            </RoleGuard>
+          } 
+        />
+        <Route 
+          path="tickets/open"
+          element={
+            <RoleGuard allowedRoles={['service_desk', 'admin']}>
+              <TicketOpenList />
+            </RoleGuard>
+          } 
+        />
+        <Route 
+          path="tickets/:id"
+          element={
+            <RoleGuard allowedRoles={['service_desk', 'admin']}>
+              <h2 className="mt-5 text-lg">Detalle del Tickete</h2>
+            </RoleGuard>
+          }
+        />
+
+        <Route 
+          path="admin/offices" 
+          element={
+            <RoleGuard allowedRoles={['admin']}>
+              <h2 className="mt-5 text-lg">pagina de Gestion de Oficinas</h2> 
+            </RoleGuard>
+          } 
+        />
+        <Route 
+          path="admin/users" 
+          element={
+            <RoleGuard allowedRoles={['admin']}>
+              <h2 className="mt-5 text-lg">pagina de Gestion de Usuarios</h2> 
+            </RoleGuard>
+          } 
+        />
+
+      </Route>
+
+      {/* 3. Ruta 404 */}
+      <Route path="*" element={<h1 className="text-center mt-10 text-3xl font-bold">404 | Pagina no encontrada</h1>} />
+      
+    </Routes>
   );
 }
 

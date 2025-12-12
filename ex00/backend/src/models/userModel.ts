@@ -5,7 +5,7 @@ export interface IUser extends Document {
     name: string;
     email: string;
     password: string;
-    role: 'standard' | 'service desk' | 'admin';
+    role: 'standard' | 'service_desk' | 'admin';
     createdAt: Date;
     updatedAt: Date;
 }
@@ -31,7 +31,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
         role: {
             type: String,
             lowercase: true,
-            enum: ['standard', 'service desk', 'admin'],
+            enum: ['standard', 'service_desk', 'admin'],
             default: 'standard',
             required: true,
         },

@@ -2,16 +2,16 @@
 import mongoose from 'mongoose';
 import { User } from '../models/userModel'; 
 import { Office } from '../models/officeModel'; 
-import { ExpedientModel } from '../models/expedientModel'; 
+import { TicketModel } from '../models/ticketModel'; 
 
 const OficeData = [
     { number: 1, city: 'Madrid', country: 'España', direction: 'Paseo de la Castellana 77' },
     { number: 2, city: 'Barcelona', country: 'España', direction: 'Carrer de Tuset 8' },
     { number: 3, city: 'Buenos Aires', country: 'Argentina', direction: 'Avenida del Libertador 1000' },
-    { number: 4, city: 'Bogotá', country: 'Colombia', direction: 'Carrera 7 # 120-20' },
+    { number: 4, city: 'Bogota', country: 'Colombia', direction: 'Carrera 7 # 120-20' },
     { number: 5, city: 'Nueva York', country: 'Estados Unidos', direction: '1500 Broadway' },
     { number: 6, city: 'Londres', country: 'Reino Unido', direction: '10 Greycoat Place' },
-    { number: 7, city: 'Ciudad de México', country: 'México', direction: 'Paseo de la Reforma 250' },
+    { number: 7, city: 'Ciudad de Mexico', country: 'Mexico', direction: 'Paseo de la Reforma 250' },
 ];
 
 //create the admin user if not exist

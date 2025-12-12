@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import userRoutes from './src/routes/userRoutes';
 import officeRoutes from './src/routes/officeRoutes';
-import expedientRoutes from './src/routes/expedientRoutes';
+import ticketRoutes from './src/routes/ticketRoutes';
 import { initdb } from './src/database/initdb';
 
 dotenv.config();
@@ -25,7 +25,7 @@ const connectDB = async (): Promise<void> => {
         await mongoose.connect(process.env.MONGO_URI);
         console.log('--- MongoDB connected ---');
     } catch (error: unknown) { 
-        // comprobación de tipo para acceder a propiedades de 'unknown'
+        // comprobacion de tipo para acceder a propiedades de 'unknown'
         if (error instanceof Error) {
             console.error(`Database connection error: ${error.message}`);
         } else {
@@ -41,7 +41,7 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use('/api/users', userRoutes);
 app.use('/api/offices', officeRoutes);
-app.use('/api/expedients', expedientRoutes);
+app.use('/api/tickets', ticketRoutes);
 
 app.use(errorHandler);
 

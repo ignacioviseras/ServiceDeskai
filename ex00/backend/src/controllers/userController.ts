@@ -63,7 +63,7 @@ const registerUser = asyncHandler(async (req: Request, res: Response) => {
  */
 const loginUser = asyncHandler(async (req: Request, res: Response) => {
     const { email, password } = req.body;
-
+    console.log("loginUser\n ", req)
     const user = await User.findOne({ email });
 
     // use bcrypt.compare to compare the hash and the normal text

@@ -1,6 +1,6 @@
 import { Schema, model, Document, Types, Model } from 'mongoose';
 
-export interface IExpedient extends Document {
+export interface ITicket extends Document {
     title: string;
     details: string; 
     reporter: Types.ObjectId; 
@@ -13,7 +13,7 @@ export interface IExpedient extends Document {
     updatedAt: Date;
 }
 
-const expedientSchema = new Schema<IExpedient>({
+const ticketSchema = new Schema<ITicket>({
     title: {
         type: String,
         required: [true, 'required field'],
@@ -58,4 +58,4 @@ const expedientSchema = new Schema<IExpedient>({
     timestamps: true
 });
 
-export const ExpedientModel: Model<IExpedient> = model<IExpedient>('Expedient', expedientSchema);
+export const TicketModel: Model<ITicket> = model<ITicket>('Ticket', ticketSchema);

@@ -31,7 +31,7 @@ const createOffice = asyncHandler(async (req: Request, res: Response) => {
     const { number, city, country, direction } = req.body;
     const customReq = req as CustomRequest;
 
-    // La comprobación de rol de Admin se hace en la ruta, pero la validación de datos es clave aquí
+    // La comprobacion de rol de Admin se hace en la ruta, pero la validacion de datos es clave aqui
     if (!number || !city || !country || !direction) {
         res.status(400);
         throw new Error('empty fields');
