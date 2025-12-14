@@ -14,8 +14,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());// to use frontend
-app.use(express.json());// allow serv to use json
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '50mb' }));// allow serv to use json
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 const connectDB = async (): Promise<void> => {
     try {

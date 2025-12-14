@@ -27,9 +27,9 @@ const protect = asyncHandler(async (req: CustomRequest, res: Response, next: Nex
             token = req.headers.authorization.split(' ')[1];
 
             const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as IDecodedToken;//decode passwd
+            console.log('ID del token decodificado:', decoded.id);
             const userDoc = await User.findById(decoded.id).select('-password');
             if (userDoc) {
-                // y mapeamos _id a string ANTES de asignarlo a req.user para que coincida con IUserPayload.
                 const userObject = userDoc.toObject();
                 req.user = {
                     _id: userObject._id.toString(),

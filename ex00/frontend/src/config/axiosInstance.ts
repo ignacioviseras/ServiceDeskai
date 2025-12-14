@@ -15,6 +15,7 @@ axiosInstance.interceptors.request.use(
         if (userJson) {
             const user = JSON.parse(userJson);
             if (user && user.token) {
+                console.log('Token adjuntado a la solicitud.');
                 config.headers.Authorization = `Bearer ${user.token}`;
             }
         }

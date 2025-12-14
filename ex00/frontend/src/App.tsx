@@ -10,6 +10,8 @@ import StandardDashboard from './pages/user/StandardDashboard';
 import { useAppSelector } from './app/hooks';
 import TicketSubmission from './pages/user/TicketSubmission';
 import TicketOpenList from './pages/servicedesk/TicketOpenList';
+import TicketHistory from './pages/user/TicketHistory';
+import OfficeManagement from './pages/admin/officeManagement';
 import './index.css';
 
 const DashboardRouter = () => {
@@ -49,15 +51,23 @@ function App() {
         <Route 
           path="reports"
           element={
-            <RoleGuard allowedRoles={['standard']}>
-              <StandardDashboard /> 
+            <RoleGuard allowedRoles={['standard', 'admin']}>
+              <TicketHistory /> 
+            </RoleGuard>
+          } 
+        />
+        <Route 
+          path="admin/offices" 
+          element={
+            <RoleGuard allowedRoles={['admin']}>
+              <OfficeManagement />
             </RoleGuard>
           } 
         />
         <Route 
           path="reports/new"
           element={
-            <RoleGuard allowedRoles={['standard']}>
+            <RoleGuard allowedRoles={['standard', 'admin']}>
               <TicketSubmission />
             </RoleGuard>
           } 
@@ -98,9 +108,7 @@ function App() {
 
       </Route>
 
-      {/* 3. Ruta 404 */}
       <Route path="*" element={<h1 className="text-center mt-10 text-3xl font-bold">404 | Pagina no encontrada</h1>} />
-      
     </Routes>
   );
 }

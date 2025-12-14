@@ -19,23 +19,27 @@ const checkTicketAccess = (ticket: ITicket, userId: string, userRole: string): b
  * @route   POST /api/tickets
  */
 const createTicket = asyncHandler(async (req: Request, res: Response) => {
-    const { title, details, location_office, photo_evidence } = req.body;
+    
+    const { 
+        title, 
+        description: details,
+        office: location_office,
+        photo: photo_evidence
+    } = req.body;
+    
     const customReq = req as CustomRequest;
-
     const userId = customReq.user?._id;
-
     if (!userId || !title || !location_office || !photo_evidence) {
         res.status(400);
-        throw new Error('title, office and photo are required');
+        throw new Error('title, description, office and photo are required');
     }
-
     try {
         const ticket = await TicketModel.create({
             title,
             details,
             location_office: new mongoose.Types.ObjectId(location_office),
             reporter: new mongoose.Types.ObjectId(userId),
-            photo_evidence,
+            photo_evidence, //cadena Base64
             state: 'new',
         });
 

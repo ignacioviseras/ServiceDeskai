@@ -8,11 +8,19 @@ export interface Office {
     city: string;
     country: string;
     direction: string;
+    description: string;
     createdAt: string;
     updatedAt: string;
 }
 
 export type OfficeData = Omit<Office, '_id' | 'createdAt' | 'updatedAt'>;
+export type UpdateOfficeData = OfficeData & { id: string };
+
+const updateOffice = async (officeData: UpdateOfficeData): Promise<Office> => { 
+    const { id, ...dataToUpdate } = officeData;
+    const response = await axiosInstance.put(API_URL + id, dataToUpdate); 
+    return response.data;
+};
 
 const getOffices = async (): Promise<Office[]> => {
     const response = await axiosInstance.get(API_URL);
@@ -32,6 +40,7 @@ const deleteOffice = async (officeId: string): Promise<string> => {
 
 const officeService = {
     getOffices,
+    updateOffice,
     createOffice,
     deleteOffice,
 };

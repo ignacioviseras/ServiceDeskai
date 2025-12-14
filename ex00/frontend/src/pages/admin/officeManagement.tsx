@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { createOffice, deleteOffice } from '../../features/offices/officeSlice';
 import { OfficeData } from '../../features/offices/officeService'; 
@@ -12,6 +12,7 @@ const OfficeManagement: React.FC = () => {
         city: '',
         country: '',
         direction: '', 
+        description: '',
     }); 
     const { number, city, country, direction } = formData; 
 
@@ -25,7 +26,7 @@ const OfficeManagement: React.FC = () => {
     const handleCreateSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(createOffice(formData)); 
-        setFormData({ number: '', city: '', country: '', direction: '' }); 
+        setFormData({ number: '', city: '', country: '', direction: '', description: '' }); 
     };
 
     const handleDelete = (id: string) => {

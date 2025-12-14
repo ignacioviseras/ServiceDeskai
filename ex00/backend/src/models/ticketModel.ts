@@ -23,7 +23,7 @@ const ticketSchema = new Schema<ITicket>({
     details: {
         type: String,
         trim: true,
-        maxlength: [500, 'max 500 characters']
+        maxlength: [5000, 'max 5000 characters']
     },
     reporter: {
         type: Schema.Types.ObjectId,
