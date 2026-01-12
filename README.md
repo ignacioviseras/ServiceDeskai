@@ -1,7 +1,9 @@
 # ServiceDeskai
 ServiceDeskai es una web que hace un analisis de oficinas desde un punto de vista de diseño de interiores, utliza una ia para analizar las fotogradias que se le presentan y asi poder hacer un asesoramiento a los clientes de como se podrian mejorar sus espacios de trabajo
 
-![video1.mp4](video/video1.gif)
+<p align="center">
+  <img src="video/video1.gif" width="300">
+</p>
 
 El proyecto se levanta creando un `/backend/.env` y añadimos esto
 
